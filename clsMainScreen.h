@@ -14,6 +14,7 @@
 #include "Global.h"
 #include "clsLoginScreen.h"
 #include "clsLoginRegisterScreen.h"
+#include "clsCurrencyExchangeScreen.h"
 
 using namespace std;
 
@@ -22,7 +23,7 @@ class clsMainScreen : protected clsScreen
 
 private:
 	
-	enum enMainMenuChoices {eNull = -1 , eShowClientList = 1, eAddNewClient = 2, eDeleteClient = 3, eUpdateClientInfo = 4, eFindClient = 5, eTransactions = 6, eManageUsers = 7, eLoginRegister = 8,eLogout = 9 };
+	enum enMainMenuChoices {eShowClientList = 1, eAddNewClient , eDeleteClient , eUpdateClientInfo , eFindClient, eTransactions , eManageUsers , eLoginRegister, eCurrencyExchange, eLogout};
 	static void _ShowClientListScreen(){
 		clsClientListScreen::ShowClientList();
 	}
@@ -49,6 +50,9 @@ private:
 	}
 	static void _Logout() {
 		SystemUser = clsUser::Find("");
+	}
+	static void _ShowCurrencyExchangeScreen() {
+		clsCurrencyExchangeScreen::ShowCurrencyExchangeScreen();
 	}
 	static void _GoBackToMainMenu() {
 		cout << "Press any key to back...";
@@ -102,6 +106,10 @@ private:
 			_ShowLoginRegisterScreen();
 			_GoBackToMainMenu();
 			break;
+		case eCurrencyExchange:
+			_ShowCurrencyExchangeScreen();
+			_GoBackToMainMenu();
+			break;
 		case eLogout:
 			_Logout();
 			break;
@@ -120,10 +128,11 @@ public:
 		cout << "\t{6} Transactions.\n";
 		cout << "\t{7} Manage Users.\n";
 		cout << "\t{8} Login Register.\n";
-		cout << "\t{9} Log Out.\n";
+		cout << "\t{9} Currency Exchange.\n";
+		cout << "\t{10} Log Out.\n";
 		cout << "==================================\n";
 
-		_PerformMainMenuOption((enMainMenuChoices)clsInputValidate::ReadIntInRange(1, 9, "Enter ( 1 - 9 ) : ", "Please Enter Number Between 1 and 8 : ", "Invalid Input , enter again : "));
+		_PerformMainMenuOption((enMainMenuChoices)clsInputValidate::ReadIntInRange(1, 10, "Enter ( 1 - 10 ) : ", "Please Enter Number Between 1 and 8 : ", "Invalid Input , enter again : "));
 
 	}
 
